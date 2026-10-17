@@ -8,42 +8,36 @@ const tasks = {
     description: 'Display the original image and inspect its dimensions, channel ordering, pixel count, and uncompressed memory size.',
     observation: 'Shape uses height before width. OpenCV’s three color channels are BGR; browser display data is RGBA. The source’s dimensions are preserved when it is loaded.',
     algorithm: 'Decode the image, display it, and inspect its numerical representation. Pixel count is width × height. For uint8, each channel occupies one byte; these are uncompressed array sizes, not JPEG file sizes.',
-    code: `from pathlib import Path\nimport cv2\n\npath = Path("sample.jpg")\nimg = cv2.imread(str(path), cv2.IMREAD_COLOR)\nif img is None:\n    raise FileNotFoundError(f"Cannot load {path}")\nheight, width, channels = img.shape\nprint("Shape:", img.shape)\nprint("Type:", img.dtype)\nprint("Pixels:", height * width)\nprint("Raw BGR bytes:", img.nbytes)\ncv2.imshow("Original", img)\ncv2.waitKey(0)\ncv2.destroyAllWindows()`,
   },
   grayscale: {
     number: '1.2', title: 'Turn color into intensity', technique: 'BT.601 grayscale', action: 'Convert to grayscale',
     description: 'Combine three color components into a single brightness value. The image keeps its width and height while losing color information.',
     observation: 'Grayscale is a weighted combination, not a simple average. Green contributes most to brightness. Width and height stay unchanged; the logical OpenCV array has one channel.',
     algorithm: 'The live implementation uses 8-bit BT.601 fixed-point weights. Its displayed RGBA pixels repeat the same intensity in R, G, and B. In Python, cvtColor produces an actual two-dimensional array.',
-    code: `# Run after loading img in Experiment 1.1.\ngray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)\nprint("Color:", img.shape)\nprint("Grayscale:", gray.shape)\ncv2.imshow("Grayscale", gray)\ncv2.imwrite("grayscale.png", gray)\ncv2.waitKey(0)\ncv2.destroyAllWindows()`,
   },
   pixel: {
     number: '1.3', title: 'One pixel. A visible difference.', technique: 'Pixel indexing & assignment', action: 'Change one pixel',
     description: 'Inspect a coordinate, read its RGB and BGR values, then change exactly one source pixel. Zoom views make the smallest edit easy to see.',
     observation: 'Use img[y, x], with row before column. A single-pixel edit is nearly invisible at full-image scale. Nearest-neighbor magnification shows the edit without smoothing it.',
     algorithm: 'Copy the original array and assign a new color at the selected coordinate. Display RGB values are reversed for the equivalent BGR representation. Before and after zooms show an up-to-11 × 11 neighborhood, including edge pixels.',
-    code: `# Run after loading img in Experiment 1.1.\nheight, width = img.shape[:2]\nx, y = width // 4, height // 2\nprint("Before BGR:", img[y, x])\nmodified = img.copy()\nmodified[y, x] = (0, 255, 0)  # Green in BGR\nprint("After BGR:", modified[y, x])\nroi = modified[max(0,y-5):min(height,y+6),\n               max(0,x-5):min(width,x+6)]\nzoom = cv2.resize(roi, (330, 330),\n                  interpolation=cv2.INTER_NEAREST)\ncv2.imshow("Edited pixel zoom", zoom)\ncv2.waitKey(0)\ncv2.destroyAllWindows()`,
   },
   crop: {
     number: '2.1', title: 'Focus on a region of interest', technique: 'Array slicing', action: 'Crop the region',
     description: 'Select a rectangular ROI using its top-left coordinate and dimensions. The highlighted box previews exactly which source pixels will remain.',
     observation: 'Cropping selects content without resampling it. End coordinates are excluded in Python slices. A central crop can have the same dimensions as a smaller resize but show different content.',
     algorithm: 'Copy consecutive rows and columns inside the selected rectangle. The output width and height match the ROI dimensions exactly; retained pixel values do not change.',
-    code: `# Run after loading img in Experiment 1.1.\nheight, width = img.shape[:2]\nx1, y1 = width // 4, height // 4\nx2 = max(x1 + 1, 3 * width // 4)\ny2 = max(y1 + 1, 3 * height // 4)\ncropped = img[y1:y2, x1:x2].copy()\nprint("Crop shape:", cropped.shape)\ncv2.imshow("Cropped ROI", cropped)\ncv2.imwrite("cropped.png", cropped)\ncv2.waitKey(0)\ncv2.destroyAllWindows()`,
   },
   resize: {
     number: '2.2', title: 'Give the image a new scale', technique: 'Resampling & interpolation', action: 'Resize the image',
     description: 'Make the complete image smaller or larger. Explore how area averaging, bilinear interpolation, and nearest neighbor estimate output pixels.',
     observation: 'cv2.resize takes (width, height), while shape reports (height, width, channels). Reduction can discard detail; enlargement adds samples, not new scene information.',
     algorithm: 'Area averaging integrates the source pixels covered by each output pixel. Bilinear uses a half-pixel mapping with four neighboring samples. Nearest neighbor selects one source sample. Rounding can differ from optimized OpenCV resize kernels by a small intensity amount.',
-    code: `# Run after loading img in Experiment 1.1.\nheight, width = img.shape[:2]\nsmaller = cv2.resize(img,\n    (max(1, width // 2), max(1, height // 2)),\n    interpolation=cv2.INTER_AREA)\nlarger = cv2.resize(img,\n    (max(1, round(width*1.5)), max(1, round(height*1.5))),\n    interpolation=cv2.INTER_LINEAR)\nprint("Smaller:", smaller.shape)\nprint("Larger:", larger.shape)\ncv2.imshow("Smaller", smaller)\ncv2.imshow("Larger", larger)\ncv2.waitKey(0)\ncv2.destroyAllWindows()`,
   },
   rotate: {
     number: '2.3', title: 'A quarter-turn changes the view', technique: 'Exact pixel remapping', action: 'Rotate the image',
     description: 'Rotate the original image by exactly 90 degrees. Choose either direction and observe how width and height swap.',
     observation: 'A square image keeps the same dimensions after a quarter-turn. A rectangular image swaps width and height. No interpolation is needed: each pixel moves to an exact new position.',
     algorithm: 'Clockwise mapping sends (x, y) to (height − 1 − y, x). Counterclockwise mapping sends it to (y, width − 1 − x). All pixel values and the full content are preserved.',
-    code: `# Run after loading img in Experiment 1.1.\nrotated = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)\nprint("Before:", img.shape)\nprint("After:", rotated.shape)\ncv2.imshow("Rotated 90 clockwise", rotated)\ncv2.imwrite("rotated.png", rotated)\ncv2.waitKey(0)\ncv2.destroyAllWindows()`,
   },
 };
 
@@ -91,7 +85,6 @@ function selectTask(name) {
   $('#task-number').textContent = `EXPERIMENT ${task.number}`;
   $('#task-title').textContent = task.title; $('#technique-tag').textContent = task.technique;
   $('#task-description').textContent = task.description; $('#process-button span').textContent = task.action;
-  $('#algorithm-explanation').textContent = task.algorithm; $('#python-code').textContent = task.code;
   resetOutput(); showError();
   $('#process-status').textContent = source ? 'Ready to explore' : 'Choose an image';
   updatePixelReadout(); updateOverlays();
@@ -352,52 +345,14 @@ $('#export-results').addEventListener('click', () => {
   downloadBlob(new Blob([JSON.stringify({ laboratory: 'CSST106 Lab 1 — Images and Image Processing', exportedAt: new Date().toISOString(), records }, null, 2)], { type: 'application/json' }), 'lab1-session.json');
 });
 $('#clear-results').addEventListener('click', () => { history = []; renderHistory(); toast('Session notebook cleared.'); });
-async function copyText(text) {
-  try { await navigator.clipboard.writeText(text); toast('Copied to clipboard.'); return true; }
-  catch { toast('Clipboard access is unavailable. Select and copy the text manually.'); return false; }
-}
-$('#copy-code').addEventListener('click', () => copyText(tasks[currentTask].code));
-
-// External destinations are supplied by the owner, never inferred.
-const defaults = { compilationUrl: '', repositoryUrl: '', ...window.LAB_CONFIG };
-let links = { ...defaults };
-try { const saved = JSON.parse(localStorage.getItem('lab01-links') || '{}'); links.compilationUrl = saved.compilationUrl ?? defaults.compilationUrl; links.repositoryUrl = saved.repositoryUrl ?? defaults.repositoryUrl; } catch { /* Browser storage can be unavailable. */ }
-function validUrl(value) {
-  if (!value) return '';
-  let url; try { url = new URL(value); } catch { throw new Error('Enter a complete URL starting with https:// or http://.'); }
-  if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password) throw new Error('Use a normal HTTP or HTTPS URL without credentials.');
-  return url.href;
-}
-function openSettings(focus = '') {
-  $('#compilation-url').value = links.compilationUrl || ''; $('#repository-url').value = links.repositoryUrl || '';
-  $('#settings-error').hidden = true; $('#settings-dialog').showModal();
-  if (focus) $(focus).focus();
-}
-$$('[data-link]').forEach(button => button.addEventListener('click', () => {
-  const key = button.dataset.link === 'compilation' ? 'compilationUrl' : 'repositoryUrl';
+// Public navigation exposes the compilation destination only.
+document.querySelectorAll('[data-link="compilation"]').forEach(button => button.addEventListener('click', () => {
   try {
-    const url = validUrl(links[key]);
-    if (url) { if (key === 'compilationUrl') location.assign(url); else window.open(url, '_blank', 'noopener,noreferrer'); }
-    else { openSettings(key === 'compilationUrl' ? '#compilation-url' : '#repository-url'); toast('Add your actual destination URL to connect this button.'); }
-  } catch { openSettings(); toast('Please correct this destination URL.'); }
+    const url = new URL(window.LAB_CONFIG?.compilationUrl || '');
+    if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password) throw new Error('Invalid compilation address.');
+    window.location.assign(url.href);
+  } catch { toast('The compilation link is not configured.'); }
 }));
-$('#open-settings').addEventListener('click', () => openSettings());
-$('.dialog-close').addEventListener('click', () => $('#settings-dialog').close());
-$('#settings-form').addEventListener('submit', event => {
-  event.preventDefault();
-  try {
-    const compilationUrl = validUrl($('#compilation-url').value.trim()), repositoryUrl = validUrl($('#repository-url').value.trim());
-    links = { ...links, compilationUrl, repositoryUrl };
-    let persistent = true; try { localStorage.setItem('lab01-links', JSON.stringify({ compilationUrl, repositoryUrl })); } catch { persistent = false; }
-    $('#settings-dialog').close(); toast(persistent ? 'Links saved in this browser.' : 'Links set for this visit. Browser storage is unavailable.');
-  } catch (error) { $('#settings-error').textContent = error.message; $('#settings-error').hidden = false; }
-});
-$('#copy-config').addEventListener('click', () => {
-  try {
-    const config = { compilationUrl: validUrl($('#compilation-url').value.trim()), repositoryUrl: validUrl($('#repository-url').value.trim()), studentName: defaults.studentName || '', section: defaults.section || '' };
-    copyText(`window.LAB_CONFIG = ${JSON.stringify(config, null, 2)};\n`);
-  } catch (error) { $('#settings-error').textContent = error.message; $('#settings-error').hidden = false; }
-});
 
 const menu = $('.menu-toggle'), navigation = $('#main-nav');
 function closeMenu() { menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-label', 'Open navigation'); navigation.classList.remove('open'); }

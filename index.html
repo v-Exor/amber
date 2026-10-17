@@ -46,7 +46,7 @@
         <div class="eyebrow pill"><i></i> LABORATORY 01 <span> / </span> IMAGE MANIPULATION</div>
         <h1 id="hero-title">Every image.<br>A world of <span>pixels.</span></h1>
         <p>See what a computer sees. Explore how digital images are represented, transformed, and brought to life—one pixel at a time.</p>
-        <div class="hero-actions"><a class="button primary" href="#experiments">Explore experiments <svg class="icon"><use href="#i-arrow"/></svg></a><a class="button ghost" href="./downloads/python-lab1.zip" download><svg class="icon"><use href="#i-code"/></svg> Get Python code</a></div>
+        <div class="hero-actions"><a class="button primary" href="#experiments">Explore experiments <svg class="icon"><use href="#i-arrow"/></svg></a></div>
         <div class="hero-footnote"><span class="check-circle">✓</span> Live image processing <span class="divider-dot">·</span> Runs in your browser</div>
       </div>
       <div class="hero-art" aria-label="Color and grayscale views of the handout sample">
@@ -62,7 +62,7 @@
         <div class="pixel-decoration" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
     </section>
-    <div class="container facts-strip"><div><strong>01<span>/</span></strong><span>Laboratory activity<small>Introduction to computer vision</small></span></div><div><strong>02</strong><span>Guided parts<small>Understand, then manipulate</small></span></div><div><strong>06</strong><span>Interactive experiments<small>Real inputs. Real results.</small></span></div><div><svg class="icon"><use href="#i-code"/></svg><span>Python + browser<small>OpenCV source included</small></span></div></div>
+    <div class="container facts-strip"><div><strong>01<span>/</span></strong><span>Laboratory activity<small>Introduction to computer vision</small></span></div><div><strong>02</strong><span>Guided parts<small>Understand, then manipulate</small></span></div><div><strong>06</strong><span>Interactive experiments<small>Real inputs. Real results.</small></span></div><div><svg class="icon"><use href="#i-code"/></svg><span>Python + browser<small>Local image processing</small></span></div></div>
 
     <section class="overview section warm" id="overview">
       <div class="container overview-grid">
@@ -91,7 +91,7 @@
               <button class="task-button" data-task="crop" aria-pressed="false"><svg class="icon"><use href="#i-crop"/></svg><span>Crop a region<small>Focus on what matters</small></span><b>2.1</b></button>
               <button class="task-button" data-task="resize" aria-pressed="false"><svg class="icon"><use href="#i-resize"/></svg><span>Resize the image<small>Smaller or larger</small></span><b>2.2</b></button>
               <button class="task-button" data-task="rotate" aria-pressed="false"><svg class="icon"><use href="#i-rotate"/></svg><span>Rotate 90°<small>A fresh orientation</small></span><b>2.3</b></button>
-              <a class="sidebar-download" href="./downloads/python-lab1.zip" download><svg class="icon"><use href="#i-download"/></svg> Download original Python</a>
+
             </aside>
             <div class="experiment-workspace">
               <div class="experiment-heading"><div><span id="task-number" class="eyebrow">EXPERIMENT 1.1</span><h3 id="task-title">Load & explore an image</h3></div><span id="technique-tag" class="technique-tag">Array representation</span></div>
@@ -112,11 +112,11 @@
               </div>
               <div class="pixel-zooms" id="pixel-zooms" hidden><figure><canvas id="zoom-before" width="220" height="220" aria-label="Nearest-neighbor magnification before editing"></canvas><figcaption>Before · source pixels magnified</figcaption></figure><figure><canvas id="zoom-after" width="220" height="220" aria-label="Nearest-neighbor magnification after editing"></canvas><figcaption>After · exactly one pixel edited</figcaption></figure><p id="zoom-note">A magnified neighborhood makes the single-pixel edit visible.</p></div>
               <div class="observation-box" aria-live="polite"><strong><svg class="icon"><use href="#i-book"/></svg> What to observe</strong><p id="observation">Shape uses height before width. OpenCV’s three color channels are BGR; browser display data is RGBA. The source’s dimensions are preserved when it is loaded.</p></div>
-              <details class="code-details"><summary><span><svg class="icon"><use href="#i-code"/></svg> Understand the technique & see the Python code</span><span class="plus-sign">+</span></summary><div class="code-body"><p id="algorithm-explanation"></p><div class="code-toolbar"><span>PYTHON / OPENCV</span><button id="copy-code" type="button">Copy code</button></div><pre tabindex="0" aria-label="Python code for the selected experiment"><code id="python-code"></code></pre><div class="code-links"><a href="./python/part1.py" download>Full Part 1 script ↗</a><a href="./python/part2.py" download>Full Part 2 script ↗</a><a href="./processing.js" target="_blank" rel="noopener">Browser implementation ↗</a></div></div></details>
+
             </div>
           </div>
         </div>
-        <div class="implementation-note"><svg class="icon"><use href="#i-code"/></svg><p><b>Same concepts, a browser implementation.</b> Live demos use real pixel operations written in JavaScript, processed in a Web Worker. The original Python/OpenCV scripts remain available. Browser images use RGBA; the display reports the equivalent OpenCV BGR shape. JPEG decoding and resize rounding may differ slightly between browser and OpenCV.</p></div>
+        <div class="implementation-note"><svg class="icon"><use href="#i-code"/></svg><p><b>Same concepts, a browser implementation.</b> Live demos use real pixel operations written in JavaScript, processed in a Web Worker. Browser images use RGBA; the display reports the equivalent OpenCV BGR shape. JPEG decoding and resize rounding may differ slightly between browser and OpenCV.</p></div>
       </div>
     </section>
 
@@ -146,8 +146,8 @@
     <section class="section container conclusion" id="conclusion"><div class="conclusion-art" aria-hidden="true"><div class="matrix-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><code>pixels → understanding</code></div><div><span class="eyebrow">THE TAKEAWAY</span><h2>A foundation for<br><span>seeing differently.</span></h2><p>Images become understandable when we treat them as data. This activity connects pixel values and color channels to visible changes, from a single edited pixel to a transformed image.</p><p>Grayscale combines channels. Cropping selects content. Resizing changes the sampling grid. Rotation rearranges positions. Together, these operations prepare us for more advanced work in feature extraction and object detection.</p><a class="button primary" href="./report/index.html" target="_blank" rel="noopener">Read the laboratory report <svg class="icon"><use href="#i-arrow"/></svg></a></div></section>
     <div class="container submission-banner"><div><strong>Ready for the hardcopy?</strong><p>The handout asks for a short report and screenshots of original, grayscale, and manipulated images.</p></div><a href="./report/index.html" target="_blank" rel="noopener">Open printable report <svg class="icon"><use href="#i-arrow"/></svg></a></div>
   </main>
-  <footer><div class="container footer-main"><a class="brand" href="#home"><img src="./assets/favicon.svg" alt="" width="34" height="34"><span>Vision<span class="brand-light">Lab</span><span class="orange">.</span><small>CSST106 — COMPUTER VISION LABORATORY</small></span></a><p>Laboratory 01<br><b>Images & Image Processing</b></p><div><button class="footer-link" data-link="repository"><svg class="icon"><use href="#i-github"/></svg> GitHub repository ↗</button><button class="footer-link" data-link="compilation"><svg class="icon"><use href="#i-back"/></svg> Back to Laboratory Compilation</button></div></div><div class="container footer-bottom"><span>Based on Laboratory Exercise No. 1 · Perception and Computer Vision · AY 2026–2027</span><button class="text-button" id="open-settings">Configure site links</button></div></footer>
-  <dialog id="settings-dialog" aria-labelledby="settings-title"><form id="settings-form"><div class="dialog-header"><span class="eyebrow">CONNECT YOUR LABORATORY</span><button type="button" class="dialog-close" aria-label="Close settings">×</button></div><h2 id="settings-title">Your links. Your platform.</h2><p>Set real URLs for your compilation and repository. These settings are saved in this browser. Edit <code>site-config.js</code> to configure them for everyone before publishing.</p><label>Laboratory Compilation URL<input id="compilation-url" type="url" placeholder="https://…" autocomplete="url"></label><label>GitHub repository URL<input id="repository-url" type="url" placeholder="https://github.com/…" autocomplete="url"></label><p class="control-hint">Leave a field blank until it is available. Only HTTP and HTTPS URLs are accepted.</p><p id="settings-error" role="alert" class="error-message" hidden></p><div class="dialog-actions"><button class="button primary" type="submit">Save links <svg class="icon"><use href="#i-check"/></svg></button><button class="button outline" type="button" id="copy-config">Copy site-config.js</button></div></form></dialog>
+  <footer><div class="container footer-main"><a class="brand" href="#home"><img src="./assets/favicon.svg" alt="" width="34" height="34"><span>Vision<span class="brand-light">Lab</span><span class="orange">.</span><small>CSST106 — COMPUTER VISION LABORATORY</small></span></a><p>Laboratory 01<br><b>Images & Image Processing</b></p><div><button class="footer-link" data-link="compilation"><svg class="icon"><use href="#i-back"/></svg> Back to Laboratory Compilation</button></div></div><div class="container footer-bottom"><span>Based on Laboratory Exercise No. 1 · Perception and Computer Vision · AY 2026–2027</span></div></footer>
+
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <noscript><div class="noscript">Enable JavaScript to run interactive experiments. The <a href="./report/index.html">original report</a> and <a href="./downloads/ANSWERS.md">complete answers</a> remain available.</div></noscript>
 </body>
