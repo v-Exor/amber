@@ -1,0 +1,19 @@
+{
+  "name": "csst106-lab-01-images",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Independent GitHub Pages website for CSST106 Lab 1 image manipulation",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test tests/processing.test.mjs",
+    "test:e2e": "playwright test",
+    "test:a11y": "node scripts/audit.mjs",
+    "check": "node scripts/check.mjs",
+    "package": "node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.56.0"
+  }
+}

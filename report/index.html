@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSST106 Laboratory Exercise 1 Report</title>
+<style>
+  @page { size: A4; margin: 16mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #151515; background: #e8ebef; font: 11pt/1.4 Arial, sans-serif; }
+  .page { width: 178mm; min-height: 260mm; margin: 8mm auto; padding: 0; background: white; }
+  h1 { font-size: 21pt; line-height: 1.15; margin: 0 0 5mm; color: black; }
+  h2 { font-size: 14pt; margin: 5mm 0 2mm; color: black; }
+  p { margin: 0 0 3mm; }
+  .course { font-size: 10pt; color: #444; margin-bottom: 3mm; }
+  .identity { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 7mm; padding: 4mm 0; margin-bottom: 3mm; }
+  .identity span { border-bottom: 1px solid #777; min-height: 7mm; }
+  .identity input { border: 0; background: transparent; width: 65%; font: inherit; color: inherit; }
+  table { border-collapse: collapse; width: 100%; margin: 3mm 0; font-size: 10pt; }
+  th, td { border: 1px solid #d9d9d9; padding: 2.2mm; text-align: left; }
+  th { background: #e9edf1; }
+  td:nth-child(2), td:nth-child(3) { text-align: center; }
+  code { font: 9.5pt Consolas, monospace; overflow-wrap: anywhere; }
+  .figures { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  figure { margin: 0; break-inside: avoid; }
+  figure img { display: block; width: 100%; height: 53mm; object-fit: contain; border: 1px solid #d9d9d9; padding: 1mm; }
+  figcaption { font-size: 9pt; line-height: 1.3; margin-top: 1.5mm; }
+  .zoom img { height: 57mm; image-rendering: pixelated; }
+  .note { font-size: 9pt; color: #444; }
+  .toolbar { width: 178mm; margin: 6mm auto; padding: 3mm; background: #fff; font-size: 10pt; }
+  button { padding: 2mm 4mm; cursor: pointer; }
+  .source { font-size: 9pt; margin-top: 5mm; color: #444; }
+  @media screen { .page { padding: 8mm; width: 194mm; box-shadow: 0 2px 10px #0002; } }
+  @media print {
+    body { background: white; font-size: 10.5pt; line-height: 1.3; }
+    .toolbar { display: none; }
+    .page { margin: 0; min-height: 0; width: auto; break-after: page; }
+    .page:last-child { break-after: auto; }
+    h1 { font-size: 19pt; margin-bottom: 4mm; }
+    h2 { font-size: 13pt; margin-top: 4mm; }
+    table { font-size: 9.5pt; }
+    th, td { padding: 1.8mm; }
+    .identity { padding: 3mm 0; gap: 2mm 7mm; }
+    .figures { gap: 4mm; }
+    figure img { height: 49mm; }
+    h1, h2 { break-after: avoid; }
+    p, table { orphans: 3; widows: 3; }
+    input { appearance: none; }
+  }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  Fill in your details below, then print using Ctrl + P.
+  <button onclick="window.print()">Print report</button>
+  <p class="note">Figures are screenshots captured from the running OpenCV windows. Typed personal details stay in this page until it is refreshed; print or save to PDF to retain them.</p>
+</div>
+<section class="page">
+  <p class="course">CSST106 Perception and Computer Vision &nbsp; | &nbsp; Laboratory Exercise 1</p>
+  <h1>Image Representation and Basic Manipulation Using OpenCV</h1>
+  <div class="identity">
+    <span>Name <input aria-label="Name"></span>
+    <span>Section <input aria-label="Section"></span>
+    <span>Date <input aria-label="Activity date"></span>
+    <span>Instructor <input aria-label="Instructor"></span>
+  </div>
+  <h2>Objective and Materials</h2>
+  <p>To understand how digital images are represented and manipulated and perform basic image operations using Python and OpenCV. The materials were a computer, Python, OpenCV, and a color sample image. The sample was the College of Computer Studies logo embedded in the laboratory handout.</p>
+  <h2>Procedure and Results</h2>
+  <p>The sample was loaded using <code>cv2.imread</code>, displayed using <code>cv2.imshow</code>, and inspected using <code>img.shape</code>. Its shape was <code>(2048, 2048, 3)</code>: 2048 rows, 2048 columns, and three Blue, Green, Red channels. It contained 4,194,304 pixels stored as 8-bit unsigned integers.</p>
+  <p>The image was converted to grayscale using <code>cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</code>. Its shape became <code>(2048, 2048)</code>. At <code>(x=512, y=1024)</code>, the BGR value was <code>[23, 111, 201]</code>, and the corresponding grayscale intensity was 128. In a copy of the image, that pixel was changed to green <code>[0, 255, 0]</code>. An enlarged neighborhood made the change visible.</p>
+  <p>The central region was cropped using <code>img[512:1536, 512:1536]</code>. The whole image was resized to half and one and a half times each original dimension. Finally, it was rotated 90 degrees clockwise.</p>
+  <table>
+    <thead><tr><th>Result</th><th>Width × height</th><th>Channels</th></tr></thead>
+    <tbody>
+      <tr><td>Original</td><td>2048 × 2048</td><td>3</td></tr>
+      <tr><td>Grayscale</td><td>2048 × 2048</td><td>1</td></tr>
+      <tr><td>Center crop</td><td>1024 × 1024</td><td>3</td></tr>
+      <tr><td>Smaller resize</td><td>1024 × 1024</td><td>3</td></tr>
+      <tr><td>Larger resize</td><td>3072 × 3072</td><td>3</td></tr>
+      <tr><td>90 degree clockwise rotation</td><td>2048 × 2048</td><td>3</td></tr>
+    </tbody>
+  </table>
+  <h2>Learning and Conclusion</h2>
+  <p>Images are numerical arrays whose values represent brightness and color. Grayscale conversion combines color channels, pixel editing assigns new values, cropping selects an area, resizing changes image dimensions, and rotation changes orientation. Correct channel ordering and row and column indexing are essential for these operations. These skills provide a foundation for document scanning, quality inspection, and object detection.</p>
+  <p class="source">Activity source: CSST106 Lab Experiment 01 Images, Laboratory Exercise No. 1, Parts 1 and 2 and Summary Discussion. The sample choice, coordinates, scale factors, and clockwise direction were selected for this demonstration.</p>
+</section>
+<section class="page">
+  <p class="course">CSST106 Laboratory Exercise 1 &nbsp; | &nbsp; Image Results</p>
+  <h1>Original Grayscale and Manipulated Images</h1>
+  <p class="note">Screenshots of the running OpenCV windows are fitted into equal display boxes. Captions state the underlying image dimensions; window sizes may differ.</p>
+  <div class="figures">
+    <figure><img src="screenshots/part1_original.png" alt="Original color logo"><figcaption><b>Figure 1 Original.</b> 2048 × 2048 pixels, three BGR channels.</figcaption></figure>
+    <figure><img src="screenshots/part1_grayscale.png" alt="Grayscale logo"><figcaption><b>Figure 2 Grayscale.</b> 2048 × 2048 pixels, one intensity channel.</figcaption></figure>
+    <figure><img src="screenshots/part2_cropped.png" alt="Central region of the logo"><figcaption><b>Figure 3 Center crop.</b> 1024 × 1024 pixels. Only the selected ROI remains.</figcaption></figure>
+    <figure><img src="screenshots/part2_resized_smaller.png" alt="Reduced whole logo"><figcaption><b>Figure 4 Smaller resize.</b> 1024 × 1024 pixels. The whole logo is retained.</figcaption></figure>
+    <figure><img src="screenshots/part2_resized_larger.png" alt="Enlarged whole logo"><figcaption><b>Figure 5 Larger resize.</b> 3072 × 3072 pixels, using linear interpolation.</figcaption></figure>
+    <figure><img src="screenshots/part2_rotated_90_clockwise.png" alt="Logo rotated clockwise"><figcaption><b>Figure 6 Rotation.</b> 90 degrees clockwise, 2048 × 2048 pixels.</figcaption></figure>
+  </div>
+  <h2>Observations</h2>
+  <p>Cropping and reducing both produced 1024 × 1024 images, but their content differs. Cropping retained the central area; reducing retained the entire logo at a lower resolution. Enlargement increased the sampling grid without recovering new source detail. The quarter-turn changed orientation while preserving pixel values; the dimensions remained unchanged because the image was square.</p>
+</section>
+<section class="page">
+  <p class="course">CSST106 Laboratory Exercise 1 &nbsp; | &nbsp; Pixel Study and Discussion</p>
+  <h1>Pixel Values and Image Representation</h1>
+  <table>
+    <thead><tr><th>Coordinate as x y</th><th>Original BGR</th><th>Grayscale</th></tr></thead>
+    <tbody>
+      <tr><td>0, 0</td><td>[255, 255, 255]</td><td>255</td></tr>
+      <tr><td>512, 1024</td><td>[23, 111, 201]</td><td>128</td></tr>
+      <tr><td>1024, 1024</td><td>[177, 210, 243]</td><td>216</td></tr>
+    </tbody>
+  </table>
+  <p>Array indexing uses <code>img[y, x]</code>. At <code>img[1024, 512]</code>, a copy was changed from <code>[23, 111, 201]</code> to <code>[0, 255, 0]</code>. Exactly one source pixel changed.</p>
+  <div class="figures zoom">
+    <figure><img src="screenshots/part1_pixel_before_zoom.png" alt="Enlarged neighborhood before pixel modification"><figcaption><b>Figure 7 Before editing.</b> An 11 × 11 neighborhood enlarged to 330 × 330 for inspection.</figcaption></figure>
+    <figure><img src="screenshots/part1_pixel_after_zoom.png" alt="Enlarged neighborhood with one green source pixel"><figcaption><b>Figure 8 After editing.</b> The green square represents one magnified source pixel.</figcaption></figure>
+  </div>
+  <h2>Digital Representation and Manipulation</h2>
+  <p>A grayscale image uses a two-dimensional intensity array. A three-channel color image uses height, width, and channel dimensions. The third array dimension represents color components, not scene depth. In this 8-bit sample, values range from 0 to 255. Grayscale conversion preserves the spatial dimensions while combining color components into one intensity value.</p>
+  <h2>Significance of Channels and Pixel Values</h2>
+  <p>Channels separate color information, and pixel values encode the data processed by computer vision algorithms. OpenCV loads this color image in BGR order. Misreading this as RGB exchanges the red and blue components. The raw color array uses 12,582,912 bytes, and the grayscale array uses 4,194,304 bytes, excluding array overhead. Compressed file sizes are different.</p>
+  <h2>Real Life Applications</h2>
+  <p>Document scanners can crop text and convert it to grayscale before OCR. Manufacturing inspection can focus on an ROI to examine defects. Traffic systems can resize camera frames and restrict processing to roadway regions. Photo and scanning tools use resizing and rotation to prepare images for viewing and further processing.</p>
+  <p class="source">The complete task answers, source references, and copy-and-paste code are provided in ANSWERS.md. Measurements and window screenshots were produced by executing part1.py and part2.py with the included sample.</p>
+</section>
+</body>
+</html>
