@@ -54,7 +54,7 @@ The bundled Python source files were preserved from the completed laboratory. Th
 
 ## Limitations and external steps
 
-- On 17 October 2026, the owner authorized publication. The complete source was pushed to **https://github.com/v-Exor/LabAct1_CSST106**, and Pages was configured from **main / (root)** at **https://v-exor.github.io/LabAct1_CSST106/**.
+- On 17 October 2026, the owner authorized publication. The complete source was pushed to **https://github.com/v-Exor/amber**, and Pages was configured from **main / (root)** at **https://v-exor.github.io/amber/**.
 - The repository URL is configured. The actual compilation website URL is still unavailable; its return button opens the functioning settings dialog until the owner supplies it. Per-browser saved settings do not update repository configuration.
 - Local repository-subpath behavior was verified before publication. Public-deployment verification is recorded below.
 - Current browser testing uses Chrome. No claim is made of exhaustive Safari, Firefox, low-memory device, or assistive-technology testing.
@@ -64,10 +64,10 @@ The bundled Python source files were preserved from the completed laboratory. Th
 
 ## Public deployment verification on 17 October 2026
 
-- Repository **v-Exor/LabAct1_CSST106** was created as public, and all **49 project files** were verified in the remote tree.
+- Repository **v-Exor/amber** was created as public, and all **49 project files** were verified in the remote tree.
 - GitHub Pages was enabled from **main / (root)**, with HTTPS enforced by GitHub.
-- GitHub's initial Pages build and deployment completed successfully: [deployment run](https://github.com/v-Exor/LabAct1_CSST106/actions/runs/39014254116).
-- The published homepage returned **HTTP 200**, and GitHub's Pages settings confirmed **Your site is live** at **https://v-exor.github.io/LabAct1_CSST106/**.
+- GitHub's initial Pages build and deployment completed successfully: [deployment run](https://github.com/v-Exor/amber/actions/runs/39014254116).
+- The published homepage returned **HTTP 200**, and GitHub's Pages settings confirmed **Your site is live** at **https://v-exor.github.io/amber/**.
 - All **5 browser end-to-end tests passed against that public GitHub Pages address**, including every image operation, original preservation, rectangular image upload, pixel keyboard selection, input errors, PNG/JSON/Python downloads, link settings, all tested screen widths, expanded code, and report image loading.
 - The repository link is set in `site-config.js`. The compilation URL remains configurable until `Website_LaboratoryAct_Compilation` has an actual published address. Use the public Pages URL above as that compilation's Lab 1 destination.
 - Browser tests support `LAB_BASE_URL` for repeatable checks of the public deployment; see the README.

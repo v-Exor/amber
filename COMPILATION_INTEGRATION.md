@@ -1,15 +1,15 @@
 # Connect Laboratory Activity 1 to your compilation
 
-Repository: **https://github.com/v-Exor/LabAct1_CSST106**
+Repository: **https://github.com/v-Exor/amber**
 
-Live laboratory website: **https://v-exor.github.io/LabAct1_CSST106/**
+Live laboratory website: **https://v-exor.github.io/amber/**
 
 Use the live website URL as the destination of the Lab 1 button in `Website_LaboratoryAct_Compilation`. The repository URL is for viewing source code.
 
 For an HTML compilation, a link can be:
 
 ```html
-<a href="https://v-exor.github.io/LabAct1_CSST106/"
+<a href="https://v-exor.github.io/amber/"
    target="_blank"
    rel="noopener noreferrer">
   Open Laboratory Activity 1

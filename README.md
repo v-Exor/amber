@@ -6,8 +6,8 @@ The website uses white, warm off-white, orange `#FF6B00`, and peach gradients to
 
 ## Repository and website addresses
 
-- GitHub repository: **https://github.com/v-Exor/LabAct1_CSST106**
-- GitHub Pages address: **https://v-exor.github.io/LabAct1_CSST106/**
+- GitHub repository: **https://github.com/v-Exor/amber**
+- GitHub Pages address: **https://v-exor.github.io/amber/**
 - Publishing source: **main**, **/ (root)**.
 
 Use the Pages address above for the Lab 1 button in `Website_LaboratoryAct_Compilation`. The Lab 1 repository link is already configured. The compilation return URL is intentionally empty because that website's actual published address has not been supplied; set `compilationUrl` in `site-config.js` when it is available. The return button opens the configuration dialog until then.
@@ -77,7 +77,7 @@ If links are empty, their buttons open an explanatory link-settings dialog inste
 
 ## Publish on GitHub Pages
 
-This repository has been uploaded as `v-Exor/LabAct1_CSST106`, and Pages is configured to deploy from `main` at the repository root. The following steps document the setup for reproducing this deployment in another repository. Future pushes to this repository's `main` branch update its Pages website automatically.
+This repository has been uploaded as `v-Exor/amber`, and Pages is configured to deploy from `main` at the repository root. The following steps document the setup for reproducing this deployment in another repository. Future pushes to this repository's `main` branch update its Pages website automatically.
 
 1. Create your own new **public** GitHub repository for this laboratory. Free GitHub Pages supports public repositories.
 2. Upload the **contents of this `lab-01` folder**, so `index.html` is at the root of that repository. Do not upload the containing `Laboratory_Activities_CSST106` folder or `node_modules`.
@@ -129,7 +129,7 @@ The suite checks all six experiments, actual output pixels, original preservatio
 To run the same browser suite against the public deployment instead of a local server:
 
 ```powershell
-$env:LAB_BASE_URL = 'https://v-exor.github.io/LabAct1_CSST106/'
+$env:LAB_BASE_URL = 'https://v-exor.github.io/amber/'
 npm run test:e2e
 Remove-Item Env:\LAB_BASE_URL
 ```
