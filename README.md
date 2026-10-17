@@ -4,6 +4,14 @@ A complete, independent GitHub Pages website for **Laboratory Exercise No. 1: Im
 
 The website uses white, warm off-white, orange `#FF6B00`, and peach gradients to complement the existing VisionLab compilation. It has no production dependencies, backend, external fonts, CDN scripts, or build requirement. JavaScript modules and a Web Worker perform real image operations locally.
 
+## Repository and website addresses
+
+- GitHub repository: **https://github.com/v-Exor/LabAct1_CSST106**
+- GitHub Pages address: **https://v-exor.github.io/LabAct1_CSST106/**
+- Publishing source: **main**, **/ (root)**.
+
+Use the Pages address above for the Lab 1 button in `Website_LaboratoryAct_Compilation`. The Lab 1 repository link is already configured. The compilation return URL is intentionally empty because that website's actual published address has not been supplied; set `compilationUrl` in `site-config.js` when it is available. The return button opens the configuration dialog until then.
+
 ## Start locally
 
 Use Node.js 22 or later. From this folder:
@@ -69,7 +77,7 @@ If links are empty, their buttons open an explanatory link-settings dialog inste
 
 ## Publish on GitHub Pages
 
-This project is prepared for deployment but has not been pushed or published.
+This repository has been uploaded as `v-Exor/LabAct1_CSST106`, and Pages is configured to deploy from `main` at the repository root. The following steps document the setup for reproducing this deployment in another repository. Future pushes to this repository's `main` branch update its Pages website automatically.
 
 1. Create your own new **public** GitHub repository for this laboratory. Free GitHub Pages supports public repositories.
 2. Upload the **contents of this `lab-01` folder**, so `index.html` is at the root of that repository. Do not upload the containing `Laboratory_Activities_CSST106` folder or `node_modules`.
@@ -117,6 +125,14 @@ npm run test:a11y
 The browser tests use an installed **Google Chrome** through Playwright. If Chrome is unavailable, install Chrome or change `launchOptions.channel` in `playwright.config.js` to an installed Playwright browser and install that browser using Playwright's documented setup. No browser needs to be installed for visitors to use the hosted website.
 
 The suite checks all six experiments, actual output pixels, original preservation, a rectangular PNG upload, pixel keyboard selection, errors, downloads, JSON export, URL settings, source code including narrow-screen expansion, mobile navigation, widths 320/390/768/1440, repository-subpath loading, report assets, and browser JavaScript errors. The accessibility command uses axe-core to check WCAG 2 A/AA and 2.1 AA rules in four representative states. Screenshots and audit results are written to ignored `artifacts/`. See `VALIDATION.md` for the final executed results and limitations.
+
+To run the same browser suite against the public deployment instead of a local server:
+
+```powershell
+$env:LAB_BASE_URL = 'https://v-exor.github.io/LabAct1_CSST106/'
+npm run test:e2e
+Remove-Item Env:\LAB_BASE_URL
+```
 
 ## Original Python laboratory
 

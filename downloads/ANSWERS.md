@@ -1,6 +1,6 @@
 # CSST106 Laboratory Exercise 1 Answers and Code
 
-Source: `C:\Users\Admin\Downloads\CSST106_Lab_Experiment_01_Images.docx`, Laboratory Exercise No. 1, Image Manipulation, Parts 1 and 2 and Summary Discussion.
+Source: `CSST106_Lab_Experiment_01_Images.docx`, Laboratory Exercise No. 1, Image Manipulation, Parts 1 and 2 and Summary Discussion.
 
 The handout lists tasks and discussion topics rather than numbered questions. The answers below cover every listed task and discussion topic. The handout does not prescribe an input photo, crop coordinates, resize scale, or rotation direction. For this worked example, `sample.jpg` is the College of Computer Studies logo extracted from the handout. The crop, scale factors, selected pixel, and clockwise direction are choices for this demonstration. Numerical observations below come from running the supplied scripts on that image.
 

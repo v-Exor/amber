@@ -67,7 +67,7 @@ test('downloads, source code, session export and real link configuration work',a
   await ready(page);await select(page,'grayscale');await run(page);
   const png=page.waitForEvent('download');await page.locator('#download-output').click();expect((await png).suggestedFilename()).toBe('lab1-grayscale-2048x2048.png');
   const json=page.waitForEvent('download');await page.locator('#export-results').click();const exportFile=await json;const stream=await exportFile.createReadStream();let body='';for await(const part of stream)body+=part;const session=JSON.parse(body);expect(session.records[0].operation).toBe('grayscale');expect(session.records[0].output.channels).toBe(1);
-  for(const path of ['downloads/python-lab1.zip','python/part1.py','python/part2.py','downloads/ANSWERS.md','report/index.html']){const response=await request.get(`http://127.0.0.1:4173/lab-01/${path}`);expect(response.ok(),path).toBeTruthy();}
+  for(const path of ['downloads/python-lab1.zip','python/part1.py','python/part2.py','downloads/ANSWERS.md','report/index.html']){const response=await request.get(new URL(path,test.info().project.use.baseURL).href);expect(response.ok(),path).toBeTruthy();}
   await page.locator('.code-details summary').click();await expect(page.locator('#python-code')).toContainText('cv2.cvtColor');
   await page.locator('[data-link="compilation"]').first().click();await expect(page.locator('#settings-dialog')).toBeVisible();await expect(page.locator('#compilation-url')).toBeFocused();
   await page.locator('#compilation-url').fill('https://example.com/portfolio/');await page.locator('#repository-url').fill('https://github.com/example/lab1');await page.locator('#settings-form button[type=submit]').click();
